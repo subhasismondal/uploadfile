@@ -12,7 +12,7 @@ const Op = db.Sequelize.Op;
     return;
   }
 
-  
+
 
   // Create a Tutorial
   const studynotes = {
@@ -29,7 +29,7 @@ const Op = db.Sequelize.Op;
         message: "Note registered successfully!",
         data
       })
-     
+
     })
     .catch(err => {
       res.status(500).send({
@@ -40,7 +40,7 @@ const Op = db.Sequelize.Op;
 };
 /*
 exports.create = (req, res) => {
- 
+
  const studynotes = {
     title: req.title,
     description: req.description,
@@ -71,7 +71,7 @@ exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-  Studynotes.findAll({ where: condition })
+  Studynotes.findAll({ order: [['updatedAt', 'DESC']] })
     .then(data => {
       res.send(data);
     })

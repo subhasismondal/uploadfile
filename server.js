@@ -4,9 +4,10 @@ var path = require("path");
 var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
 global.__basedir = __dirname;
 app.use(express.static(__dirname + '/resources/static/assets/uploads/'));
+app.use(express.static(__dirname + '/resources/static/assets/currentaff/'));
 app.use(function (req, res, next) {
 
 
@@ -25,15 +26,18 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
- 
+
 const db = require('./app/config/db.config');
 
-app.use(cors({origin: 'http://localhost:8080'}));
-  
+app.use(cors({
+  origin: ['http://localhost:8080','http://localhost:4200','http://localhost:19006']
+}));
+
+
 // force: true will drop the table if it already exists
 db.sequelize.sync({force: false}).then(() => {
   console.log('Drop and Resync with { force: false }');
-}); 
+});
 
 require('./app/routers/upload.router.js')(app);
 
@@ -43,11 +47,10 @@ app.get('*',(req,res)=>{
 
 // Create a Server
 var server = app.listen(8081, function () {
- 
+
   var host = server.address().address
   var port = server.address().port
- 
-  console.log("App listening at http://%s:%s", host, port)
- 
-})
 
+  console.log("App listening at http://%s:%s", host, port)
+
+})

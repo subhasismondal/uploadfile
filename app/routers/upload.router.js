@@ -13,8 +13,6 @@ module.exports = function(app){
 	app.get('/api/allcas', caworker.findAll);
 
 	app.post("/api/createqa", qa.create);
-
-    // Retrieve all Tutorials
   app.get("/api/allqa", qa.findAll);
 
 	app.post("/api/studynotes", studynotes.create);

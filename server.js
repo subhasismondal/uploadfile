@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 const db = require('./app/config/db.config');
 
 app.use(cors({
-  origin: ['http://localhost:8080','http://localhost:4200','http://localhost:19006']
+  origin: ['http://65.20.72.240:8080','http://65.20.72.240:4200','http://65.20.72.240:19006']
 }));
 
 
